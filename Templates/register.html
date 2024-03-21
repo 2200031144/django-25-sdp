@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="background">
+        <img src="{% static 'img_1.png' %}" alt="Background Image" class="background-image">
+        <div class="container">
+            <h2>Register</h2>
+            <form method="post" action="{% url 'register' %}">
+                {% csrf_token %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message success">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                <div class="form-group">
+                    <label for="username" class="label">Username:</label>
+                    <input type="text" id="username" name="username" class="input" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="label">Email:</label>
+                    <input type="email" id="email" name="email" class="input" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="label">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" class="input" required>
+                </div>
+                <div class="form-group">
+                    <label for="password1" class="label">Password:</label>
+                    <input type="password" id="password1" name="password1" class="input" required>
+                </div>
+                <div class="form-group">
+                    <label for="password2" class="label">Confirm Password:</label>
+                    <input type="password" id="password2" name="password2" class="input" required>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+            <div class="existing-account-link">
+                Already have an account? <a href="{% url 'login' %}">Login here</a>.
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Base container styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .background {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(50%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Heading styles */
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Form styles */
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #555;
+            width: 120px; /* Adjust label width as needed */
+        }
+
+        .input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            flex-grow: 1;
+            margin-top: 5px; /* Add space after text fields */
+        }
+
+        /* Button styles */
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Button hover effect */
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        /* Message styles */
+        .message {
+            text-align: center;
+            margin-bottom: 10px;
+            color: green;
+        }
+
+        /* Link styles */
+        .existing-account-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .existing-account-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .existing-account-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}

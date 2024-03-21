@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Book Store</title>
+    <style>
+        /* Style for the navbar */
+        .navbar {
+            background-color: #2980b9; /* Setting the navbar color to a shade of blue */
+            overflow: hidden;
+            padding: 20px; /* Adding padding to the navbar */
+            text-align: center; /* Centering the navbar contents */
+        }
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            border-radius: 5px; /* Adding border-radius for rounded corners */
+            transition: background-color 0.3s; /* Adding transition for smoother hover effect */
+        }
+        .navbar a:hover {
+            background-color: #2c3e50; /* Darkening the background color on hover */
+        }
+        /* Adjust the width to make links side by side */
+        .navbar a.home,
+        .navbar a.view,
+        .navbar a.cart,
+        .navbar a.books { /* Added .navbar a.books class */
+            float: left;
+            font-size: 20px;
+        }
+        .navbar a.register,
+        .navbar a.login{
+            float: right;
+            font-size: 20px;
+        }
+        /* Style for the heading */
+        .navbar-heading {
+            color: white;
+            margin: 0 auto; /* Centering the heading */
+            padding: 0;
+            font-size: 36px; /* Heading font size */
+        }
+        /* Style for the content */
+        .content {
+            margin: 10px; /* Add some margin around the content */
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <!-- Heading -->
+    <h1 class="navbar-heading">Online Book Store</h1>
+    <!-- Home link -->
+    <a href="{% url 'home' %}" class="home">Home</a>
+    <!-- Books link -->
+
+
+    <!-- Other links -->
+    <a href="{% url 'register' %}" class="register">Register</a>
+    <!-- Login link -->
+    <a href="{% url 'login' %}" class="login">Login</a>
+</div>
+
+<div class="content">
+    {% block content %}
+    <!-- Default content -->
+    {% endblock %}
+</div>
+
+</body>
+</html>

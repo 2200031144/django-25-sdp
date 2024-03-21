@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="background" style="position: relative;">
+    <img src="{% static 'img.png' %}" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(50%);">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+        <div style="background-color: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 10px;">
+            <h1 style="color: white; font-family: 'Arial', sans-serif; font-size: 36px; line-height: 1.5;">
+                Welcome to our online bookstore!
+            </h1>
+            <p style="color: white; font-family: 'Arial', sans-serif; font-size: 18px; line-height: 1.5;">
+                Discover a world of literary treasures at your fingertips. From timeless classics to contemporary bestsellers, there's something here for everyone.
+            </p>
+            <p style="color: white; font-family: 'Arial', sans-serif; font-size: 18px; line-height: 1.5;">
+                Ordering is effortless with secure payment options and fast shipping.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <!-- Your content here -->
+</div>
+{% endblock %}

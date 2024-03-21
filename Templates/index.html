@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Catalog</title>
+    {% load static %}
+    <style>
+        /* Styles for book container */
+        .book-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        /* Styles for individual book */
+        .book {
+            width: 48%; /* Two books per row with a small gap */
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Styles for book image */
+        .book-image {
+            width: 100%; /* Ensure the image fills the container */
+            max-height: 200px; /* Limit the height of the image */
+            object-fit: contain; /* Scale the image to fit the container while preserving aspect ratio */
+            margin-bottom: 10px;
+        }
+
+        /* Styles for book name */
+        .book-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* Styles for author name */
+        .author-name {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        /* Styles for book now button */
+        .book-now-button {
+            display: block;
+            width: 100%;
+            padding: 8px 0;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none; /* Remove default underline for anchor tags */
+        }
+
+        /* Button hover effect */
+        .book-now-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styles for search input */
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Search input -->
+<div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search for books...">
+</div>
+
+<!-- Example books -->
+<div class="book-container">
+    <!-- Book 1: To Kill a Mockingbird -->
+    <div class="book">
+        <img src="{% static 'img_3.png' %}" alt="To Kill a Mockingbird" class="book-image">
+        <div class="book-name">To Kill a Mockingbird</div>
+        <div class="author-name">Harper Lee</div>
+        <a href="#" class="book-now-button" onclick="redirectToCart()">Book Now</a>
+    </div>
+
+    <!-- Book 2: The Great Gatsby -->
+    <div class="book">
+        <img src="{% static 'img_4.png' %}" alt="The Great Gatsby" class="book-image">
+        <div class="book-name">The Great Gatsby</div>
+        <div class="author-name">F. Scott Fitzgerald</div>
+        <a href="#" class="book-now-button" onclick="redirectToCart()">Book Now</a>
+    </div>
+
+    <!-- Add more books here -->
+    <!-- Repeat the book containers for additional books -->
+
+</div>
+
+<script>
+    function redirectToCart() {
+        window.location.href = "cart.html";
+    }
+
+    // JavaScript to handle search functionality
+    document.getElementById('searchInput').addEventListener('input', function() {
+        var searchValue = this.value.toLowerCase();
+        var books = document.querySelectorAll('.book');
+
+        books.forEach(function(book) {
+            var bookName = book.querySelector('.book-name').textContent.toLowerCase();
+            var authorName = book.querySelector('.author-name').textContent.toLowerCase();
+
+            if (bookName.includes(searchValue) || authorName.includes(searchValue)) {
+                book.style.display = 'block';
+            } else {
+                book.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

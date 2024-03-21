@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        /* Styles for cart container */
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Styles for cart items */
+        .cart-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        /* Styles for book details */
+        .book-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .book-image {
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .book-name {
+            font-weight: bold;
+        }
+
+        .book-price {
+            color: #666;
+        }
+
+        /* Styles for payment details */
+        .payment-details {
+            margin-top: 20px;
+            border-top: 2px solid #007bff;
+            padding-top: 20px;
+        }
+
+        .total-price {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* Button styles */
+        .checkout-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Button hover effect */
+        .checkout-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="cart-container">
+    <!-- Cart items -->
+    <form id="cartForm">
+        {% for item in cart_items %}
+        <div class="cart-item">
+            <div class="book-details">
+                <img src="{{ item.image_url }}" alt="{{ item.title }}" class="book-image">
+                <div>
+                    <div class="book-name">{{ item.title }}</div>
+                    <div class="book-price">${{ item.price }}</div>
+                    <input type="checkbox" name="book" value="{{ item.price }}">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </form>
+
+    <!-- Payment details -->
+    <div class="payment-details">
+        <div>Total Price: <span id="totalPrice" class="total-price">$0.00</span></div>
+        <button onclick="calculateTotal()">Calculate Total</button>
+    </div>
+</div>
+
+<script>
+    function calculateTotal() {
+        var totalPrice = 0;
+        var checkboxes = document.querySelectorAll('input[name="book"]:checked');
+        checkboxes.forEach(function(checkbox) {
+            totalPrice += parseFloat(checkbox.value);
+        });
+        document.getElementById('totalPrice').innerText = '$' + totalPrice.toFixed(2);
+    }
+</script>
+
+</body>
+</html>

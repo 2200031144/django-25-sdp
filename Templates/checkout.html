@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .payment-details {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #007bff;
+        }
+
+        .payment-details p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .total-price {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Checkout</h1>
+        <div class="payment-details">
+            <p>Book Title: <span id="bookTitle"></span></p>
+            <p>Price: $<span id="bookPrice"></span></p>
+            <!-- Add more payment details here if needed -->
+            <p class="total-price">Total Price: $<span id="totalPrice"></span></p>
+            <input type="radio" id="cashOnDelivery" name="paymentMethod" value="cash">
+            <label for="cashOnDelivery">Cash On Delivery</label>
+        </div>
+        <!-- Add payment form or payment processing logic here -->
+        <button onclick="payNow()" class="button">Pay Now</button>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // Fetch URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const title = urlParams.get('title');
+            const price = parseFloat(urlParams.get('price'));
+
+            // Display book details on the page
+            document.getElementById('bookTitle').innerText = title;
+            document.getElementById('bookPrice').innerText = price.toFixed(2);
+            document.getElementById('totalPrice').innerText = price.toFixed(2);
+        }
+
+        function payNow() {
+            // Add payment processing logic here
+            alert('Payment processed successfully!');
+        }
+    </script>
+    <script>
+var options = {
+    "key": "rzp_test_B70fxkCYG7mhbZ",
+    "amount": "50000",
+    "currency": "INR",
+    "name": "Online Bookstore",
+    "description": "Purchase Book",
+    "order_id": "{{order_id}}",
+    "handler": function (response) {
+        console.log("Payment Success")
+        var form = document.getElementById("myform");
+        window.location.href = http://127.0.0.1:8000/paymentdone?order_id=${response.id}&payment_id=${response.razorpay_payment_id}&cust_id=${form.elements["cust_id"].value};
+    },
+    "theme": {
+        "color": "#3399cc"
+    },
+};
+
+var rzp1 = new Razorpay(options);
+
+rzp1.on('payment.failed', function (response) {
+    alert(response.error.description);
+});
+
+document.getElementById('rzp-button1').onclick = function (e) {
+    rzp1.open();
+    e.preventDefault();
+};
+    </script>
+</body>
+</html>

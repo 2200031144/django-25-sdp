@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <img src="{% static 'img_2.png' %}" alt="Background Image" class="background-image">
+    <div class="centered-content">
+        <h2 class="welcome-message">Welcome to the Home Page!</h2>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Container styles */
+    .container {
+        position: relative;
+        text-align: center;
+    }
+
+    /* Background image styles */
+    .background-image {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Centered content styles */
+    .centered-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Welcome message styles */
+    .welcome-message {
+        font-size: 24px;
+        color: #fff;
+        margin-bottom: 20px;
+    }
+
+    /* Logout button styles */
+    .logout-btn {
+        padding: 10px 20px;
+        background-color: #d9534f;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Logout button hover effect */
+    .logout-btn:hover {
+        background-color: #c9302c;
+    }
+</style>
+{% endblock %}
